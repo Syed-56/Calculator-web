@@ -19,34 +19,34 @@
     </header>
 
     <div class="calculator">
-        <div class="display"></div>
+        <div class="display" id="display"></div>
         <div class="non-display">
             <div class="numberAndButtons">
                 <div class="clear">
-                    <button id="AC" title="Clear Input">AC</button>
-                    <button id="eraase" title="Erase">X</button>
+                    <button id="AC" title="Clear Input" onclick="clearDisplay()">AC</button>
+                    <button id="eraase" title="Erase" onclick="eraseElement()">X</button>
                 </div>
                 <div class="numbers">
-                    <button id="1">1</button>
-                    <button id="2">2</button>
-                    <button id="3">3</button>
-                    <button id="4">4</button>
-                    <button id="5">5</button>
-                    <button id="6">6</button>
-                    <button id="7">7</button>
-                    <button id="8">8</button>
-                    <button id="9">9</button>
-                    <button id="0">0</button>
-                    <button id="point">.</button>
+                    <button id="1" onclick="writeOnDisplay('1')">1</button>
+                    <button id="2" onclick="writeOnDisplay('2')">2</button>
+                    <button id="3" onclick="writeOnDisplay('3')">3</button>
+                    <button id="4" onclick="writeOnDisplay('4')">4</button>
+                    <button id="5" onclick="writeOnDisplay('5')">5</button>
+                    <button id="6" onclick="writeOnDisplay('6')">6</button>
+                    <button id="7" onclick="writeOnDisplay('7')">7</button>
+                    <button id="8" onclick="writeOnDisplay('8')">8</button>
+                    <button id="9" onclick="writeOnDisplay('9')">9</button>
+                    <button id="0" onclick="writeOnDisplay('0')">0</button>
+                    <button id="point" onclick="writeOnDisplay('.')">.</button>
                     
                 </div>
             </div>
             <div class="symbols">
-                <button id="plus">+</button>
-                <button id="minus">-</button>
-                <button id="multiply">*</button>
-                <button id="divide">/</button>
-                <button id="equals" title="Result">=</button>
+                <button id="plus" onclick="writeOnDisplay('+')">+</button>
+                <button id="minus" onclick="writeOnDisplay('-')">-</button>
+                <button id="multiply" onclick="writeOnDisplay('*')">*</button>
+                <button id="divide" onclick="writeOnDisplay('/')">/</button>
+                <button id="equals" title="Result" onclick="addEqualTo()">=</button>
             </div>
         </div>
     </div>
