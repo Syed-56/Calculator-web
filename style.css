@@ -110,6 +110,8 @@ button:hover {
 }
 .clear > #eraase {
     background-color: red;
+    font-size: 30px;
+    font-weight: 900;
 }
 .numbers > button {
     flex: 1;

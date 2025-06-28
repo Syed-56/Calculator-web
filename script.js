@@ -1,5 +1,9 @@
 const display = document.getElementById('display');
 const operators = ['+', '-', '*', '/', '='];
+let currentInput = '';
+let storedValue = null;
+let currentOperator = null;
+
 function isOperator(char) {
   return operators.includes(char);
 }
@@ -27,22 +31,83 @@ function errorExists(currentText, lastChar, number) {
     return false;
 }
 
-function writeOnDisplay(number) {
+function writeOnDisplay(input) {
     const currentText = display.textContent;
     const lastChar = currentText.slice(-1); 
-    if(errorExists(currentText, lastChar, number)) return;
+    if (errorExists(currentText, lastChar, input)) return;
 
-    display.textContent += number;
+    if (isOperator(input)) {
+        if (currentInput === '') return; // Avoid triggering if there's no number
+        handleCalculations(input);
+        display.textContent += input;
+        currentInput = ''; // Prepare for next number
+    } else {
+        currentInput += input;
+        display.textContent += input;
+    }
 }
+
+function handleCalculations(operator) {
+    const parsedNumber = parseFloat(currentInput);
+    if (isNaN(parsedNumber)) return;
+
+    if (storedValue === null) {
+        storedValue = parsedNumber;
+    } else if (currentOperator !== null) {
+        storedValue = calculate(storedValue, currentOperator, parsedNumber);
+    }
+
+    if (operator === '=') {
+        display.textContent = storedValue.toString();
+        resetCalculator(); 
+    } else {
+        currentOperator = operator;
+    }
+}
+
+function calculate(a, operator, b) {
+    switch(operator) {
+      case '+': return a + b;
+      case '-': return a - b;
+      case '*': return a * b;
+      case '/': return b !== 0 ? a / b : NaN;
+      default:  return b;
+    }
+}
+
 function eraseElement() {
     display.textContent = display.textContent.slice(0,-1);
+    currentInput = currentInput.slice(0, -1);
+}
+function resetCalculator() {
+    currentInput = '';
+    storedValue = null;
+    currentOperator = null;
 }
 function clearDisplay() {
-    display.textContent = "";
-}
-function addEqualTo() {
-    display.textContent += "=";
-    clearDisplay();
+    display.textContent = ''; 
+    resetCalculator();      
 }
 
-//now we have the display variable, first start from beginning and store integer/float until an operator comes, that integer/opreator is stored in a variable and now after that operator, we begin iterating again and store next integer/float until another operator comes or the variable ends. wrt operator written, call the function (if + then sum() etc)
+document.addEventListener('keydown', handleKeyboardInput);
+function handleKeyboardInput(event) {
+    const key = event.key;
+
+    if (!isNaN(key)) {
+        // It's a number (0–9)
+        writeOnDisplay(key);
+    } else if (['+', '-', '*', '/'].includes(key)) {
+        writeOnDisplay(key);
+    } else if (key === 'Enter' || key === '=') {
+        event.preventDefault(); // Avoid default behavior
+        handleCalculations('=');
+    } else if (key === 'Backspace') {
+        eraseElement();
+    } else if (key === 'Escape') {
+        clearDisplay();
+    } else if (key === '.') {
+        writeOnDisplay('.');
+    } else {
+        console.warn(`Unsupported key pressed: ${key}`);
+    }
+}

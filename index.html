@@ -25,7 +25,7 @@
             <div class="numberAndButtons">
                 <div class="clear">
                     <button id="AC" title="Clear Input" onclick="clearDisplay()">AC</button>
-                    <button id="eraase" title="Erase" onclick="eraseElement()">X</button>
+                    <button id="eraase" title="Erase" onclick="eraseElement()">⌫</button>
                 </div>
                 <div class="numbers">
                     <button id="1" onclick="writeOnDisplay('1')">1</button>
@@ -47,7 +47,7 @@
                 <button id="minus" onclick="writeOnDisplay('-')">-</button>
                 <button id="multiply" onclick="writeOnDisplay('*')">*</button>
                 <button id="divide" onclick="writeOnDisplay('/')">/</button>
-                <button id="equals" title="Result" onclick="addEqualTo()">=</button>
+                <button id="equals" title="Result" onclick="handleCalculations('=')">=</button>
             </div>
         </div>
     </div>
