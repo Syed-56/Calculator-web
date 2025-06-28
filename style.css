@@ -159,6 +159,11 @@ button:hover {
     width: 70px;
     height: 100px;
 }
+.symbols > #equals {
+    background-color: green;
+    color: white;
+    font-size: 40px;
+}
 
 footer {
     background-color: hsla(0, 4%, 90%, 0.774);
