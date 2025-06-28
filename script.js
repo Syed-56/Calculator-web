@@ -30,6 +30,10 @@ function writeOnDisplay(number) {
         console.error("Error: Cannot start with a Decimal!");
         return;
     }
+    if ((lastChar=='.' && isOperator(number)) || (isOperator(lastChar) && number=='.')) {
+        console.error("Cant Put Operator with Decimal");
+        return;
+    }
 
     display.textContent += number;
 }
